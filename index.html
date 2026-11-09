@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Chúc Mừng Sinh Nhật Ngọc Hoa (Cải)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="Css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<!-- Nền hình ảnh img/bg.jpg cố định thay thế background.js -->
+<div class="bg-container" aria-hidden="true">
+  <img src="img/bg.jpg" alt="Hình nền sinh nhật">
+</div>
+<div class="bg-overlay" aria-hidden="true"></div>
+
+<!-- Popup mở quà nhún nhảy bounce dễ thương để kích hoạt nhạc nền -->
+<div class="modal-overlay" id="giftModalOverlay">
+  <div class="gift-modal" id="giftModal">
+    <div class="gift-icon-wrap">
+      <span class="gift-icon">🎁</span>
+    </div>
+    <h2>Món Quà Cho Cải! ✨</h2>
+    <p>Thu Huệ (Ngáo) có một món quà bất ngờ gửi tới Ngọc Hoa.<br>Chạm vào đây để mở quà và bật nhạc quẩy nhé! 🎶💖</p>
+    <button class="gift-btn" id="openGiftBtn" type="button">✨ Mở Quà Ngay ✨</button>
+  </div>
+</div>
+
+<!-- Nhạc nền tự động phát lặp lại (Audio Loop) -->
+<audio id="bgMusic" src="shidenbeatsmusic-happy-birthday-to-you-bossa-nova-style-arrangement-21399.mp3" loop preload="auto"></audio>
+
+<!-- Nút điều khiển âm nhạc nổi ở góc màn hình -->
+<button class="music-toggle" id="musicToggle" type="button" aria-label="Bật/Tắt nhạc nền" title="Bật/Tắt nhạc nền">
+  <span class="music-icon" id="musicToggleIcon">🎵</span>
+</button>
+
+<header class="hero">
+  <img class="bunting" src="img/banner.png" alt="Dây cờ chúc mừng sinh nhật">
+  <div class="portrait tilt" data-depth="1">
+    <img src="img/user.png" alt="Ngọc Hoa (Cải)">
+    <i class="spark s1">✦</i><i class="spark s2">✧</i><i class="spark s3">✦</i><i class="spark s4">✧</i>
+  </div>
+  <h1 class="typewrap" aria-live="polite"><span id="typewriter"></span><i class="cursor" aria-hidden="true"></i></h1>
+  <p class="hero-name">Ngọc Hoa (Cải)</p>
+  <a class="scroll-hint" href="#letter" aria-label="Cuộn xuống xem thư chúc mừng">Cuộn xuống dưới</a>
+</header>
+
+<main>
+  <!-- THIỆP 1: Bức thư giấy với lời chào và bài thơ khịa phần 1 (Trang điểm & Sắc đẹp) -->
+  <section class="wrap" id="letter" data-r>
+    <div class="letter tilt">
+      <span class="heart" aria-hidden="true">❤️</span>
+      <h2>Gửi Ngọc Hoa (Cải) iu quý,</h2>
+      <p style="--d:.1s">Chào Cải, là tao - <strong>Thu Huệ (Ngáo)</strong> đây nè! 🍂</p>
+      <p style="--d:.2s">Chúc mừng sinh nhật cô bạn thân yêu siêu xịn xò 🎉</p>
+      <p style="--d:.3s">Nhân ngày đặc biệt, tao xin đúc kết bí kíp đỉnh cao nhan sắc tặng riêng cho Cải:</p>
+      
+      <div class="poem-box">
+        <p style="--d:.4s">💄 <em>Đánh nền không mốc, đánh phấn không bay,</em></p>
+        <p style="--d:.5s">👀 <em>Gắn mi nhoay nhoáy, gặp trai đổ ngay.</em></p>
+        <p style="--d:.6s">🔪 <em>Kẻ mắt sắc lẹm, tình duyên vẫn tịt...</em></p>
+        <p style="--d:.7s">💋 <em>Son môi đỏ chót, ví tiền đỏ... vì hết tiền!</em> 😂</p>
+      </div>
+
+      <p style="--d:.8s">Bí kíp cuộc đời vẫn còn phần 2 ở phía dưới, cuộn xuống khám phá tiếp nhé Cải! 🍁</p>
+    </div>
+  </section>
+
+  <section class="cake-sec wrap" data-r>
+    <div class="cake-stage"><span class="ring"></span><img class="cake" src="img/cake.svg" alt="Bánh sinh nhật"></div>
+    <button class="pill" id="wishBtn" type="button">Ước một điều ước ✨</button>
+    <p class="wish" id="wishMsg" aria-live="polite"></p>
+  </section>
+
+  <section class="memories wrap" data-r>
+    <h2 class="sec-title">Những Kỷ Niệm Của Chúng Ta</h2>
+    <div class="stack" id="stack" aria-label="Hình ảnh kỷ niệm">
+      <figure class="polaroid"><img src="img/1.jpg" alt="Chụp ảnh nhóm" draggable="false"><figcaption>Hội bạn thân</figcaption></figure>
+      <figure class="polaroid"><img src="img/2.jpg" alt="Các bạn trong lớp học" draggable="false"><figcaption>Thanh xuân rực rỡ</figcaption></figure>
+      <figure class="polaroid"><img src="img/3.jpg" alt="Nhóm bạn trên bậc thềm" draggable="false"><figcaption>Team quậy phá</figcaption></figure>
+      <figure class="polaroid"><img src="img/4.jpg" alt="Cả nhóm bên nhau" draggable="false"><figcaption>Bên nhau mãi mãi</figcaption></figure>
+    </div>
+    <div class="ctrl">
+      <button id="prevImg" class="round" aria-label="Ảnh trước">‹</button>
+      <span id="count" class="count">1 / 4</span>
+      <button id="nextImg" class="round" aria-label="Ảnh tiếp theo">›</button>
+    </div>
+  </section>
+
+  <!-- THIỆP 2: Tấm thiệp 3D lật mở với bài thơ khịa phần 2 (Ăn chơi, Tình duyên & Tiền tài) -->
+  <section class="final wrap" data-r>
+    <h2 class="sec-title">Lời Chúc Yêu Thương</h2>
+    <div class="card-wrap tilt" id="cardContainer">
+      <div class="card" id="card">
+        <div class="side front">
+          <h3>Chúc Mừng Sinh Nhật</h3>
+          <p>Chạm vào nút để mở nốt bí kíp cuộc đời từ Huệ Ngáo nhé</p>
+          <img src="img/cake.svg" alt="Bánh kem">
+          <button class="pill dark" id="toggleButton" type="button">Mở thiệp ✨</button>
+        </div>
+        <div class="side back">
+          <h3>Ngọc Hoa (Cải) Ơi! 🎂</h3>
+          <div class="card-poem">
+            <p>✨ Ăn mãi không béo, ngủ mãi không già,</p>
+            <p>💸 Đi chơi không trả, đi ăn không mời!</p>
+            <p>👑 Ế thì có giá, có bồ thì phải giàu,</p>
+            <p>👊 Người yêu cũ tự vả, người yêu mới tự tìm đến cửa!</p>
+            <p>🌊 Tiền vào như nước, tiền ra nhỏ giọt,</p>
+            <p>🌟 Nhan sắc thăng hạng, trí khôn nâng cấp!</p>
+          </div>
+          <p class="card-blessing">Đùa tí thôi chứ chúc Cải của tao tuổi mới luôn rực rỡ, ngập tràn niềm vui, tiền đầy túi, tình đầy tim và mãi là bạn tốt của nhau nhé! Happy Birthday! 💖🎉</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" data-r>
+  <p>Cảm ơn vì đã ghé thăm, chúc Cải luôn tuyệt vời và tỏa sáng! 🪔</p>
+  <small>Được tạo nên bằng cả trái tim bởi Thu Huệ (Ngáo)</small>
+</footer>
+
+<div id="lanterns" aria-hidden="true"></div>
+
+<script src="main.js"></script>
+</body>
+</html>
